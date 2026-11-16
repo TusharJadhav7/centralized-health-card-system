@@ -2,3 +2,10 @@
 node_modules/
 Frontend/node_modules/
 
+
+.idea/
+out/
+target/
+*.class
+*.log
+.env
