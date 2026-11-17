@@ -1,7 +1,14 @@
 // Shared request helper (same style as the SMT api.js). Every module file uses it.
 // In dev, Vite proxies /api -> http://localhost:8085. For a direct URL set VITE_API_BASE.
-export const API_BASE = import.meta.env.VITE_API_BASE || '/api';
-
+// old configuration
+//export const API_BASE = import.meta.env.VITE_API_BASE || '/api';
+//new configuration 
+export const API_BASE =
+  import.meta.env.VITE_API_BASE ||
+  (import.meta.env.DEV
+    ? '/api'
+    : 'https://centralized-health-card-system.onrender.com');
+    
 export async function request(method, path, { body = null, token = null, params = null } = {}) {
   const qs = params ? '?' + new URLSearchParams(params).toString() : '';
   const opts = { method, headers: { ...(body ? { 'Content-Type': 'application/json' } : {}), ...(token ? { Authorization: `Bearer ${token}` } : {}) } };
